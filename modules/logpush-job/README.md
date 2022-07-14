@@ -2,6 +2,35 @@
 
 Manage the cloudflare logpush job that sends specific logs to your *Coralogix* account.
 
+## Usage
+
+```hcl
+terraform {
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 3.0"
+    }
+  }
+}
+
+provider "cloudflare" {
+  email   = "example@coralogix.com"
+  api_key = "7ae12522bce3d8d988ec5f0ed8b8ef9016e09"
+}
+
+module "logpush-job" {
+    source = "coralogix/cloudflare/coralogix//modules/logpush-job"
+
+    coralogix_region   = "Europe"
+    coralogix_private_key = "79cf16dc-0dfa-430e-a651-ec76bfa96d01"
+    cloudflare_logpush_dataset = "http_requests"
+    cloudflare_logpush_fields = "RayID,ZoneName" # can be left empty aswell for all fields
+    cloudflare_zone_id = "ca17eeeb371963f662965e4de0ed7403" # to be used with zone-scoped datasets
+    # cloudflare_account_id = "bc20385621cb7dc622aeb4810ca235df" # to be used with account-scoped datasets
+}
+```
+
 ## Requirements
 
 | Name | Version |
@@ -22,8 +51,6 @@ Manage the cloudflare logpush job that sends specific logs to your *Coralogix* a
 |------|-------------|------|---------|:--------:|
 | <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`Europe`, `Europe2`, `India`, `Singapore`, `US`] | `string` | `Europe` | no |
 | <a name="input_coralogix_private_key"></a> [coralogix\_private\_key](#input\_coralogix\_private\_key) | The Coralogix private key which is used to validate your authenticity | `string` | n/a | yes |
-| <a name="input_cloudflare_email"></a> [cloudflare\_email](#input\_cloudflare\_email) | The cloudflare email for authentication | `string` | n/a | yes |
-| <a name="input_cloudflare_api_key"></a> [cloudflare\_api\_key](#input\_cloudflare\_api\_key) | The cloudflare api key for authentication | `string` | n/a | yes |
 | <a name="input_cloudflare_logpush_dataset"></a> [cloudflare\_logpush\_dataset](#input\_cloudflare\_logpush\_dataset) | The cloudflare logpush job data-set | `string` | n/a | yes |
 | <a name="input_cloudflare_logpush_fields"></a> [cloudflare\_logpush\_fields](#input\_cloudflare\_logpush\_fields) | The logpush dataset specific fields to log delimited with comma, leave empty to include all fields. the timestamp and its variants are included automatically. | `string` | "" | no |
 | <a name="input_cloudflare_zone_id"></a> [cloudflare\_zone\_id](#input\_cloudflare\_zone\_id) | The cloudflare zone id for zone based data-sets | `string` | "" | yes (for zone-scoped datasets) |

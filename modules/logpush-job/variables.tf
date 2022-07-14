@@ -14,17 +14,6 @@ variable "coralogix_private_key" {
   sensitive   = true
 }
 
-variable "cloudflare_email" {
-  description = "The cloudflare email for authentication"
-  type        = string
-}
-
-variable "cloudflare_api_key" {
-  description = "The cloudflare api key for authentication"
-  type        = string
-  sensitive = true
-}
-
 variable "cloudflare_logpush_dataset" {
   description = "The cloudflare logpush job data-set"
   type        = string
