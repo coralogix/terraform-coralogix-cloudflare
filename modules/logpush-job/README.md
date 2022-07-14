@@ -33,8 +33,8 @@ Manage the cloudflare logpush job that sends specific logs to your *Coralogix* a
 
 | Name | Description |
 |------|-------------|
-| <a name="output_logpush_job_name"></a> [logpush\job\_name](#output\_logpush\_job\_name) | The name of the logpush job |
-| <a name="output_logpush_job_scope"></a> [logpush\job\scope](#output\_logpush\_job\_scope) | The scope of the logpush job |
+| <a name="output_logpush_job_name"></a> [logpush\_job\_name](#output\_logpush\_job\_name) | The name of the logpush job |
+| <a name="output_logpush_job_scope"></a> [logpush\_job\scope](#output\_logpush\_job\_scope) | The scope of the logpush job |
 
 ## Common errors
 
