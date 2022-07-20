@@ -1,0 +1,4 @@
+name: mysql
+CX_PRODUCT: platform
+terraform: true
+
