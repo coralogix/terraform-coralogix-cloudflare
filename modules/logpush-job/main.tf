@@ -71,7 +71,7 @@ resource "cloudflare_logpush_job" "crx-logpush-zone" {
   zone_id = var.cloudflare_zone_id
   name                = local.job_name
   logpull_options     = "fields=${coalesce(var.cloudflare_logpush_fields,local.dataset_full_fields[var.cloudflare_logpush_dataset])},${local.dataset_timestamp[var.cloudflare_logpush_dataset]}&timestamps=unixnano"
-  destination_conf = "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
+  destination_conf = "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   frequency = "low"
   lifecycle {
