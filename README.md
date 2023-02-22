@@ -21,7 +21,7 @@ terraform {
 
 provider "cloudflare" {
   email   = "example@coralogix.com"
-  api_key = "7ae12522bce3d8d988ec5f0ed8b8ef9016e09"
+  api_key = "XXXXXXXXXX"
 }
 
 module "logpush-job" {
@@ -37,6 +37,8 @@ module "logpush-job" {
     # cloudflare_account_id = "bc20385621cb7dc622aeb4810ca235df" # to be used with account-scoped datasets
 }
 ```
+
+By default, the integration will set application_name as Cloudflare, and subsystem_name as the data set name if values are not specified.
 
 ## Authors
 
