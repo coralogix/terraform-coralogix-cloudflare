@@ -40,3 +40,17 @@ variable "cloudflare_account_id" {
   type = string
   default = ""
 }
+
+variable "coralogix_application_name" {
+  description = "The Coralogix Application Name for your logs"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "coralogix_subsystem_name" {
+  description = "The Coralogix SubSystem Name for your logs"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
