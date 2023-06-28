@@ -18,6 +18,8 @@ locals {
     gateway_http = "GatewayHTTP"
     gateway_network = "GatewayNetwork"
     network_analytics_logs = "NetworkAnalyticsLogs"
+    access_requests = "AccessRequests"
+    casb_findings = "CASBFindings"
   }
     dataset_timestamp = {
     dns_logs = "Timestamp"
@@ -30,6 +32,8 @@ locals {
     gateway_http = "Datetime"
     gateway_network = "Datetime"
     network_analytics_logs = "Datetime"
+    access_requests = "CreatedAt"
+    casb_findings = "DetectedTimestamp"
   }
   dataset_full_fields = {
     dns_logs = "ColoCode,EDNSSubnet,EDNSSubnetLength,QueryName,QueryType,ResponseCached,ResponseCode,SourceIP"
@@ -42,6 +46,8 @@ locals {
     gateway_http = "AccountID,Action,BlockedFileHash,BlockedFileName,BlockedFileReason,BlockedFileSize,BlockedFileType,DestinationIP,DestinationPort,DeviceID,DownloadedFileNames,Email,HTTPHost,HTTPMethod,HTTPVersion,IsIsolated,PolicyID,Referer,RequestID,SourceIP,SourcePort,URL,UploadedFileNames,UserAgent,UserID"
     gateway_network = "AccountID,Action,DestinationIP,DestinationPort,DeviceID,Email,OverrideIP,OverridePort,PolicyID,SNI,SessionID,SourceIP,SourcePort,Transport,UserID"
     network_analytics_logs = "AttackCampaignID,AttackID,ColoCountry,ColoGeoHash,ColoID,ColoName,DestinationASN,DestinationASNDescription,DestinationCountry,DestinationGeoHash,DestinationPort,Direction,GREChecksum,GREEthertype,GREHeaderLength,GREKey,GRESequenceNumber,GREVersion,ICMPChecksum,ICMPCode,ICMPType,IPDestinationAddress,IPDestinationSubnet,IPFragmentOffset,IPHeaderLength,IPMoreFragments,IPProtocol,IPProtocolName,IPSourceAddress,IPSourceSubnet,IPTotalLength,IPTotalLengthBuckets,IPTtl,IPTtlBuckets,IPv4Checksum,IPv4DontFragment,IPv4Dscp,IPv4Ecn,IPv4Identification,IPv4Options,IPv6Dscp,IPv6Ecn,IPv6ExtensionHeaders,IPv6FlowLabel,IPv6Identification,MitigationReason,MitigationScope,MitigationSystem,ProtocolState,RuleID,RulesetID,RulesetOverrideID,SampleInterval,SourceASN,SourceASNDescription,SourceCountry,SourceGeoHash,SourcePort,TCPAcknowledgementNumber,TCPChecksum,TCPDataOffset,TCPFlags,TCPFlagsString,TCPMss,TCPOptions,TCPSackBlocks,TCPSacksPermitted,TCPSequenceNumber,TCPTimestampEcr,TCPTimestampValue,TCPUrgentPointer,TCPWindowScale,TCPWindowSize,UDPChecksum,UDPPayloadLength,Verdict"
+    access_requests = "Action,Allowed,AppDomain,AppUUID,Connection,Country,Email,IPAddress,PurposeJustificationPrompt,PurposeJustificationResponse,RayID,TemporaryAccessApprovers,TemporaryAccessDuration,UserUID"
+    casb_findings = "AssetDisplayName,AssetExternalID,AssetLink,AssetMetadata,FindingTypeDisplayName,FindingTypeID,FindingTypeSeverity,InstanceID,IntegrationDisplayName,IntegrationID,IntegrationPolicyVendor"
   }
   dataset_type = {
     dns_logs = "zone"
@@ -54,6 +60,8 @@ locals {
     gateway_http = "account"
     gateway_network = "account"
     network_analytics_logs = "account"
+    access_requests = "account"
+    casb_findings = "account"
   }
 
 }

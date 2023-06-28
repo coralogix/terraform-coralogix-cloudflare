@@ -18,8 +18,8 @@ variable "cloudflare_logpush_dataset" {
   description = "The cloudflare logpush job data-set"
   type        = string
   validation {
-    condition = contains(["dns_logs","firewall_events","http_requests","nel_reports","spectrum_events","audit_logs","gateway_dns","gateway_http","gateway_network","network_analytics_logs"], var.cloudflare_logpush_dataset)
-    error_message = "Logpush dataset must be one of these values: ['dns_logs','firewall_events','http_requests','nel_reports','spectrum_events','audit_logs','gateway_dns','gateway_http','gateway_network','network_analytics_logs']."
+    condition = contains(["dns_logs","firewall_events","http_requests","nel_reports","spectrum_events","audit_logs","gateway_dns","gateway_http","gateway_network","network_analytics_logs","access_requests","casb_findings"], var.cloudflare_logpush_dataset)
+    error_message = "Logpush dataset must be one of these values: ['dns_logs','firewall_events','http_requests','nel_reports','spectrum_events','audit_logs','gateway_dns','gateway_http','gateway_network','network_analytics_logs','access_requests','casb_findings']."
   }
 }
 
