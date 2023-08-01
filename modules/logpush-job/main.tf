@@ -6,6 +6,7 @@ locals {
     India     = "cdn-ingress.app.coralogix.in"
     Singapore = "cdn-ingress.coralogixsg.com"
     US        = "cdn-ingress.coralogix.us"
+    US2       = "cdn-ingress.cx498.coralogix.com"
   }
   coralogix_dataset = {
     dns_logs = "DNSLogs"
