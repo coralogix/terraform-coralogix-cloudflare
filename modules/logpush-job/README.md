@@ -49,7 +49,7 @@ module "logpush-job" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`Europe`, `Europe2`, `India`, `Singapore`, `US`] | `string` | `Europe` | no |
+| <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`Europe`, `Europe2`, `India`, `Singapore`, `US`, `US2`] | `string` | `Europe` | no |
 | <a name="input_coralogix_private_key"></a> [coralogix\_private\_key](#input\_coralogix\_private\_key) | The Coralogix private key which is used to validate your authenticity | `string` | n/a | yes |
 | <a name="input_cloudflare_logpush_dataset"></a> [cloudflare\_logpush\_dataset](#input\_cloudflare\_logpush\_dataset) | The cloudflare logpush job data-set | `string` | n/a | yes |
 | <a name="input_cloudflare_logpush_fields"></a> [cloudflare\_logpush\_fields](#input\_cloudflare\_logpush\_fields) | The logpush dataset specific fields to log delimited with comma, leave empty to include all fields. the timestamp and its variants are included automatically. | `string` | "" | no |
