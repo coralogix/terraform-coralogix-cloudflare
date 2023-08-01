@@ -25,7 +25,7 @@ locals {
     dns_firewall_logs = "DnsFirewallLogs"
     magic_ids_detections = "MagicIdsDetections"
     workers_trace_events = "WorkersTraceEvents"
-    zero_trust_network_sessions = "ZeroTrustNetworkSessions"
+    zero_trust_network_sessions = "ZeroTrustNetworkSessionLogs"
   }
     dataset_timestamp = {
     dns_logs = "Timestamp"
