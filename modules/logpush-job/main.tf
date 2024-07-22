@@ -1,12 +1,12 @@
 locals {
   job_name = "Coralogix-${replace(var.cloudflare_logpush_dataset,"_","-")}-${random_string.this.result}"
   coralogix_regions = {
-    Europe    = "cdn-ingress.coralogix.com"
-    Europe2   = "cdn-ingress.eu2.coralogix.com"
-    India     = "cdn-ingress.app.coralogix.in"
-    Singapore = "cdn-ingress.coralogixsg.com"
-    US        = "cdn-ingress.coralogix.us"
-    US2       = "cdn-ingress.cx498.coralogix.com"
+    Europe    = "ingress.coralogix.com"
+    Europe2   = "ingress.eu2.coralogix.com"
+    India     = "ingress.app.coralogix.in"
+    Singapore = "ingress.coralogixsg.com"
+    US        = "ingress.coralogix.us"
+    US2       = "ingress.cx498.coralogix.com"
   }
   coralogix_dataset = {
     dns_logs = "DNSLogs"
@@ -99,7 +99,7 @@ resource "cloudflare_logpush_job" "crx-logpush-zone" {
   zone_id = var.cloudflare_zone_id
   name                = local.job_name
   logpull_options     = "fields=${coalesce(var.cloudflare_logpush_fields,local.dataset_full_fields[var.cloudflare_logpush_dataset])},${local.dataset_timestamp[var.cloudflare_logpush_dataset]}&timestamps=unixnano"
-  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
+  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   frequency = "low"
   filter = ""
@@ -115,7 +115,7 @@ resource "cloudflare_logpush_job" "crx-logpush-account" {
   account_id = var.cloudflare_account_id
   name                = local.job_name
   logpull_options     = "fields=${coalesce(var.cloudflare_logpush_fields,local.dataset_full_fields[var.cloudflare_logpush_dataset])},${local.dataset_timestamp[var.cloudflare_logpush_dataset]}&timestamps=unixnano"
-  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
+  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   frequency = "low"
   filter = ""
