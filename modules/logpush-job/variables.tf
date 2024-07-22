@@ -3,7 +3,7 @@ variable "coralogix_region" {
   type        = string
   default     = "Europe"
     validation {
-    condition = contains(["Europe","Europe2","India","Singapore","US"], var.coralogix_region)
+    condition = contains(["Europe","Europe2","India","Singapore","US","US2"], var.coralogix_region)
     error_message = "The coralogix region must be on of these values: [Europe, Europe2, India, Singapore, US, US2]."
   }
 }
