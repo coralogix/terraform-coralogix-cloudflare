@@ -54,3 +54,27 @@ variable "coralogix_subsystem_name" {
   sensitive   = true
   default     = ""
 }
+
+variable "cloudflare_account_filter" {
+  description = "value to filter the account logs"
+  type        = string
+  default     = ""
+}
+
+variable "cloudflare_zone_filter" {
+  description = "value to filter the zone logs"
+  type        = string
+  default     = ""
+}
+
+variable "cloudflare_account_sample_rate" {
+  description = "The sample rate for account based data-sets"
+  type        = number
+  default     = 1
+}
+
+variable "cloudflare_zone_sample_rate" {
+  description = "The sample rate for zone based data-sets"
+  type        = number
+  default     = 1
+}
