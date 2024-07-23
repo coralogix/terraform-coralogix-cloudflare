@@ -102,9 +102,12 @@ resource "cloudflare_logpush_job" "crx-logpush-zone" {
   destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   frequency = "low"
-  filter = ""
+  filter = var.cloudflare_zone_filter
   ownership_challenge = ""
   kind = ""
+  output_options {
+    sample_rate = var.cloudflare_zone_sample_rate
+  }
   lifecycle {
   }
 }
@@ -118,9 +121,12 @@ resource "cloudflare_logpush_job" "crx-logpush-account" {
   destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   frequency = "low"
-  filter = ""
+  filter = var.cloudflare_account_filter
   ownership_challenge = ""
   kind = ""
+  output_options {
+    sample_rate = var.cloudflare_account_sample_rate
+  }
   lifecycle {
   }
 }
