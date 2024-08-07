@@ -25,8 +25,8 @@ variable "cloudflare_logpush_dataset" {
 
 variable "cloudflare_logpush_fields" {
   description = "The logpush dataset specific fields to log delimited with comma, leave empty to include all fields. the timestamp and its variants are included automatically."
-  type        = string
-  default = ""
+  type        = list(string)
+  default     = []
 }
 
 variable "cloudflare_zone_id" {
