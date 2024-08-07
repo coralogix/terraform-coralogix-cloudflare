@@ -3,7 +3,7 @@
 ## Requirements
 
 `Terraform` - Version 1.20+
-`Cloudflare` - Version 3+
+`Cloudflare` - Version 4.0+
 
 ## Usage
 
@@ -14,7 +14,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 4.38"
+      version = "~> 4.0"
     }
   }
 }
@@ -39,6 +39,8 @@ module "logpush-job" {
 ```
 
 By default, the integration will set application_name as Cloudflare, and subsystem_name as the data set name if values are not specified.
+
+WARNING: Breaking Change in version 1.10 - New output_options added in cloudflare/cloudflare
 
 ## Authors
 
