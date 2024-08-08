@@ -3,7 +3,7 @@
 ## Requirements
 
 `Terraform` - Version 1.20+
-`Cloudflare` - Version 3+
+`Cloudflare` - Version 4.0+
 
 ## Usage
 
@@ -14,7 +14,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
 }
@@ -32,13 +32,15 @@ module "logpush-job" {
     coralogix_application_name = "myapp_cloudflare"
     coralogix_subsystem_name = "mysub_cloudflare"
     cloudflare_logpush_dataset = "http_requests"
-    cloudflare_logpush_fields = "RayID,ZoneName" # can be left empty aswell for all fields
-    cloudflare_zone_id = "ca17eeeb371963f662965e4de0ed7403" # to be used with zone-scoped datasets
-    # cloudflare_account_id = "bc20385621cb7dc622aeb4810ca235df" # to be used with account-scoped datasets
+    cloudflare_logpush_fields = ["EdgeStartTimestamp", "EdgePathingOp", "EdgePathingSrc"] # Need to include 'Timestamp' key, can be left empty aswell for all fields
+    cloudflare_zone_id = "xxxxxxxxxxxxxxxxxxxxx" # to be used with zone-scoped datasets
+    # cloudflare_account_id = "xxxxxxxxxxxxxxxx" # to be used with account-scoped datasets
 }
 ```
 
 By default, the integration will set application_name as Cloudflare, and subsystem_name as the data set name if values are not specified.
+
+WARNING: Breaking Change in version 1.10 - New output_options added in cloudflare/cloudflare
 
 ## Authors
 

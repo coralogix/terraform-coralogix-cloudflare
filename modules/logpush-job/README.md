@@ -1,7 +1,7 @@
 # logpush-job
 
 Manage the cloudflare logpush job that sends specific logs to your *Coralogix* account.
-
+WARNING: Breaking Change in version 1.10 - New output_options added in cloudflare/cloudflare
 ## Usage
 
 ```hcl
@@ -9,25 +9,27 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
 }
 
 provider "cloudflare" {
   email   = "example@coralogix.com"
-  api_key = "7ae12522bce3d8d988ec5f0ed8b8ef9016e09"
+  api_key = "XXXXXXXXXX"
 }
 
 module "logpush-job" {
     source = "coralogix/cloudflare/coralogix//modules/logpush-job"
 
     coralogix_region   = "Europe"
-    coralogix_private_key = "79cf16dc-0dfa-430e-a651-ec76bfa96d01"
+    coralogix_private_key = "XXXXXX-XXXXX"
+    coralogix_application_name = "myapp_cloudflare"
+    coralogix_subsystem_name = "mysub_cloudflare"
     cloudflare_logpush_dataset = "http_requests"
-    cloudflare_logpush_fields = "RayID,ZoneName" # can be left empty aswell for all fields
-    cloudflare_zone_id = "ca17eeeb371963f662965e4de0ed7403" # to be used with zone-scoped datasets
-    # cloudflare_account_id = "bc20385621cb7dc622aeb4810ca235df" # to be used with account-scoped datasets
+    cloudflare_logpush_fields = ["EdgeStartTimestamp", "EdgePathingOp", "EdgePathingSrc"] # Need to include 'Timestamp' key, can be left empty aswell for all fields
+    cloudflare_zone_id = "xxxxxxxxxxxxxxxxxxxxx" # to be used with zone-scoped datasets
+    # cloudflare_account_id = "xxxxxxxxxxxxxxxx" # to be used with account-scoped datasets
 }
 ```
 
@@ -36,13 +38,13 @@ module "logpush-job" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.20.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | >= 3.0.0 |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | >= 4.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | >= 3.19.0 |
+| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | >= 4.38.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 3.3.2 |
 
 ## Inputs
