@@ -1,10 +1,10 @@
 variable "coralogix_region" {
-  description = "The Coralogix location region, possible options are [Europe, Europe2, India, Singapore, US, US2]"
+  description = "The Coralogix location region, possible options are [EU1, EU2, AP1, AP2, US1, US2, AP3]"
   type        = string
-  default     = "Europe"
+  default     = "EU1"
     validation {
-    condition = contains(["Europe","Europe2","India","Singapore","US","US2"], var.coralogix_region)
-    error_message = "The coralogix region must be on of these values: [Europe, Europe2, India, Singapore, US, US2]."
+    condition = contains(["Europe","Europe2","India","Singapore","US","US2","AP3","EU1","EU2","AP1","Ap2","US2"], var.coralogix_region)
+    error_message = "The coralogix region must be on of these values: [Europe, Europe2, India, Singapore, US, US2, AP3, EU1, EU2, AP1, AP2, US1]."
   }
 }
 
@@ -45,14 +45,14 @@ variable "coralogix_application_name" {
   description = "The Coralogix Application Name for your logs"
   type        = string
   sensitive   = true
-  default     = ""
+  default     = "cx-Cloudflare-Logpush-default-application"
 }
 
 variable "coralogix_subsystem_name" {
   description = "The Coralogix SubSystem Name for your logs"
   type        = string
   sensitive   = true
-  default     = ""
+  default     = "cx-Cloudflare-Logpush-default-subsystem"
 }
 
 variable "cloudflare_account_filter" {
@@ -77,4 +77,37 @@ variable "cloudflare_zone_sample_rate" {
   description = "The sample rate for zone based data-sets"
   type        = number
   default     = 1
+}
+
+variable "max_upload_bytes" {
+  description = "The maximum uncompressed file size of a batch of logs"
+  type        = number
+  default     = null
+
+  validation {
+    condition     = var.max_upload_bytes == null || (coalesce(var.max_upload_bytes, 0) >= 1 && coalesce(var.max_upload_bytes, 0) <= 5)
+    error_message = "This setting value must be between 5 MB and 1 GB"
+  }
+}
+
+variable "max_upload_interval_seconds" {
+  description = "The maximum interval in seconds for log batches"
+  type        = number
+  default     = null
+
+  validation {
+    condition     = var.max_upload_interval_seconds == null || (coalesce(var.max_upload_interval_seconds, 0) >= 30 && coalesce(var.max_upload_interval_seconds, 0) <= 300)
+    error_message = "This setting must be between 30 and 300 seconds (5 minutes)"
+  }
+}
+
+variable "max_upload_records" {
+  description = "The maximum number of log lines per batch"
+  type        = number
+  default     = null
+
+  validation {
+    condition     = var.max_upload_records == null || (coalesce(var.max_upload_records, 0) >= 100 && coalesce(var.max_upload_records, 0) <= 1000000)
+    error_message = "This setting must be between 1000 and 1,000,000 lines"
+  }
 }
