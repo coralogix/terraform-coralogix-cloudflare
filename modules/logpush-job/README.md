@@ -51,12 +51,17 @@ module "logpush-job" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`Europe`, `Europe2`, `India`, `Singapore`, `US`, `US2`] | `string` | `Europe` | no |
+| <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`EU1`, `EU2`, `AP1`, `AP2`, `US1`, `US2`, `AP3`] | `string` | `EU1` | no |
 | <a name="input_coralogix_private_key"></a> [coralogix\_private\_key](#input\_coralogix\_private\_key) | The Coralogix private key which is used to validate your authenticity | `string` | n/a | yes |
+| <a name="input_coralogix_application_name"></a> [coralogix\_application\_name](#input\_coralogix\_application\_name) | The Coralogix Application Name for your logs | `string` | `cx-Cloudflare-Logpush-default-application` | no |
+| <a name="input_coralogix_subsystem_name"></a> [coralogix\_subsystem\_name](#input\_coralogix\_subsystem\_name) | The Coralogix SubSystem Name for your logs | `string` | `cx-Cloudflare-Logpush-default-subsystem` | no |
 | <a name="input_cloudflare_logpush_dataset"></a> [cloudflare\_logpush\_dataset](#input\_cloudflare\_logpush\_dataset) | The cloudflare logpush job data-set | `string` | n/a | yes |
 | <a name="input_cloudflare_logpush_fields"></a> [cloudflare\_logpush\_fields](#input\_cloudflare\_logpush\_fields) | The logpush dataset specific fields to log delimited with comma, leave empty to include all fields. the timestamp and its variants are included automatically. | `string` | "" | no |
 | <a name="input_cloudflare_zone_id"></a> [cloudflare\_zone\_id](#input\_cloudflare\_zone\_id) | The cloudflare zone id for zone based data-sets | `string` | "" | yes (for zone-scoped datasets) |
 | <a name="input_cloudflare_account_id"></a> [cloudflare\_account\_id](#input\_cloudflare\_account\_id) | The cloudflare account id for account based data-sets | `string` | "" | yes (for account-scoped datasets) |
+| <a name="input_max_upload_bytes"></a> [max\_upload\_bytes](#input\_max\_upload\_bytes) | The maximum uncompressed file size of a batch of logs. This setting value must be between 5 MB and 1 GB. This parameter is not available for jobs with `edge` as its kind | `number` | n/a | no |
+| <a name="input_max_upload_interval_seconds"></a> [max\_upload\_interval\_seconds](#input\_max\_upload\_interval\_seconds) | The maximum interval in seconds for log batches. This setting must be between 30 and 300 seconds (5 minutes). This parameter is not available for jobs with `edge` as its kind. | `number` | n/a | no |
+| <a name="input_max_upload_records"></a> [max\_upload\_records](#input\_max\_upload\_records) | The maximum number of log lines per batch. This setting must be between 1000 and 1,000,000 lines. This parameter is not available for jobs with `edge` as its kind | `number` | n/a | no |
 
 ## Outputs
 

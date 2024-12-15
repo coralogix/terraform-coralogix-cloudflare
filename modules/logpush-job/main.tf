@@ -2,11 +2,17 @@ locals {
   job_name = "Coralogix-${replace(var.cloudflare_logpush_dataset,"_","-")}-${random_string.this.result}"
   coralogix_regions = {
     Europe    = "ingress.coralogix.com"
+    EU1       = "ingress.coralogix.com"
     Europe2   = "ingress.eu2.coralogix.com"
+    EU2       = "ingress.eu2.coralogix.com"
     India     = "ingress.app.coralogix.in"
+    AP1       = "ingress.app.coralogix.in"
     Singapore = "ingress.coralogixsg.com"
+    AP2       = "ingress.coralogixsg.com"
     US        = "ingress.coralogix.us"
+    US1       = "ingress.coralogix.us"
     US2       = "ingress.cx498.coralogix.com"
+    AP3       = "ingress.ap3.coralogix.com"
   }
   coralogix_dataset = {
     dns_logs = "DNSLogs"
@@ -110,7 +116,10 @@ resource "cloudflare_logpush_job" "crx-logpush-zone" {
   name                = local.job_name
   destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
-  frequency = "low"
+  # frequency = "low"
+  max_upload_bytes = var.max_upload_bytes 
+  max_upload_interval_seconds = var.max_upload_interval_seconds
+  max_upload_records = var.max_upload_records 
   filter = var.cloudflare_zone_filter
   ownership_challenge = ""
   kind = ""
@@ -130,7 +139,10 @@ resource "cloudflare_logpush_job" "crx-logpush-account" {
   name                = local.job_name
   destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
-  frequency = "low"
+  # frequency = "low"
+  max_upload_bytes = var.max_upload_bytes 
+  max_upload_interval_seconds = var.max_upload_interval_seconds
+  max_upload_records = var.max_upload_records 
   filter = var.cloudflare_account_filter
   ownership_challenge = ""
   kind = ""
