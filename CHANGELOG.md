@@ -1,5 +1,5 @@
 # Changelog
-## v1.0.14 / 2024-12-15
+## v1.1.0 / 2024-12-15
 ### 💡 Enhancements 💡
 - Add support for new region `AP3`, and for  regions syntax: `EU1`, `EU2`, `AP1`, `AP2`, `US1`
 - Replaced deprecated filed `frequency` with `max_upload_bytes`, `max_upload_interval_seconds` and  `max_upload_records` 
