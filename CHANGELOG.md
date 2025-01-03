@@ -1,4 +1,7 @@
 # Changelog
+## v1.2.0 / 2025-01-03
+### 💥 Breaking Change 💥 
+- Removed max_upload_bytes and max_upload_records to match Coralogix Ingress
 ## v1.1.0 / 2024-12-15
 ### 💡 Enhancements 💡
 - Add support for new region `AP3`, and for  regions syntax: `EU1`, `EU2`, `AP1`, `AP2`, `US1`
