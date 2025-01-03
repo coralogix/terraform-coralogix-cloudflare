@@ -117,9 +117,9 @@ resource "cloudflare_logpush_job" "crx-logpush-zone" {
   destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   # frequency = "low"
-  max_upload_bytes = var.max_upload_bytes 
+  max_upload_bytes = 5242880 
   max_upload_interval_seconds = var.max_upload_interval_seconds
-  max_upload_records = var.max_upload_records 
+  max_upload_records = 10000 
   filter = var.cloudflare_zone_filter
   ownership_challenge = ""
   kind = ""
@@ -140,9 +140,9 @@ resource "cloudflare_logpush_job" "crx-logpush-account" {
   destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset             = var.cloudflare_logpush_dataset
   # frequency = "low"
-  max_upload_bytes = var.max_upload_bytes 
+  max_upload_bytes = 5242880
   max_upload_interval_seconds = var.max_upload_interval_seconds
-  max_upload_records = var.max_upload_records 
+  max_upload_records = 10000 
   filter = var.cloudflare_account_filter
   ownership_challenge = ""
   kind = ""

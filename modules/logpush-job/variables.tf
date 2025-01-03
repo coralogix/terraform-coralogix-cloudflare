@@ -79,17 +79,6 @@ variable "cloudflare_zone_sample_rate" {
   default     = 1
 }
 
-variable "max_upload_bytes" {
-  description = "The maximum uncompressed file size of a batch of logs"
-  type        = number
-  default     = null
-
-  validation {
-    condition     = var.max_upload_bytes == null || (coalesce(var.max_upload_bytes, 0) >= 1 && coalesce(var.max_upload_bytes, 0) <= 5)
-    error_message = "This setting value must be between 5 MB and 1 GB"
-  }
-}
-
 variable "max_upload_interval_seconds" {
   description = "The maximum interval in seconds for log batches"
   type        = number
@@ -98,16 +87,5 @@ variable "max_upload_interval_seconds" {
   validation {
     condition     = var.max_upload_interval_seconds == null || (coalesce(var.max_upload_interval_seconds, 0) >= 30 && coalesce(var.max_upload_interval_seconds, 0) <= 300)
     error_message = "This setting must be between 30 and 300 seconds (5 minutes)"
-  }
-}
-
-variable "max_upload_records" {
-  description = "The maximum number of log lines per batch"
-  type        = number
-  default     = null
-
-  validation {
-    condition     = var.max_upload_records == null || (coalesce(var.max_upload_records, 0) >= 100 && coalesce(var.max_upload_records, 0) <= 1000000)
-    error_message = "This setting must be between 1000 and 1,000,000 lines"
   }
 }
