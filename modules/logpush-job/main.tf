@@ -1,17 +1,18 @@
 locals {
   job_name = "Coralogix-${replace(var.cloudflare_logpush_dataset,"_","-")}-${random_string.this.result}"
   coralogix_regions = {
-    Europe    = "ingress.coralogix.com"
-    EU1       = "ingress.coralogix.com"
+    Europe    = "ingress.eu1.coralogix.com"
+    EU1       = "ingress.eu1.coralogix.com"
     Europe2   = "ingress.eu2.coralogix.com"
     EU2       = "ingress.eu2.coralogix.com"
-    India     = "ingress.app.coralogix.in"
-    AP1       = "ingress.app.coralogix.in"
-    Singapore = "ingress.coralogixsg.com"
-    AP2       = "ingress.coralogixsg.com"
-    US        = "ingress.coralogix.us"
-    US1       = "ingress.coralogix.us"
-    US2       = "ingress.cx498.coralogix.com"
+    India     = "ingress.ap1.coralogix.com"
+    AP1       = "ingress.ap1.coralogix.com"
+    Singapore = "ingress.ap2.coralogix.com"
+    AP2       = "ingress.ap2.coralogix.com"
+    US        = "ingress.us1.coralogix.com"
+    US1       = "ingress.us1.coralogix.com"
+    US2       = "ingress.us2.coralogix.com"
+    Indonesia = "ingress.ap3.coralogix.com"
     AP3       = "ingress.ap3.coralogix.com"
   }
   coralogix_dataset = {
