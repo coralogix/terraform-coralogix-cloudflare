@@ -2,8 +2,8 @@ variable "coralogix_region" {
   description = "The Coralogix location region, possible options are [EU1, EU2, AP1, AP2, US1, US2, AP3]"
   type        = string
   default     = "EU1"
-    validation {
-    condition = contains(["Europe","Europe2","India","Singapore","US","US2","AP3","EU1","EU2","AP1","Ap2","US2"], var.coralogix_region)
+  validation {
+    condition     = contains(["Europe", "Europe2", "India", "Singapore", "US", "US2", "AP3", "EU1", "EU2", "AP1", "Ap2", "US2"], var.coralogix_region)
     error_message = "The coralogix region must be on of these values: [Europe, Europe2, India, Singapore, US, US2, AP3, EU1, EU2, AP1, AP2, US1]."
   }
 }
@@ -18,7 +18,7 @@ variable "cloudflare_logpush_dataset" {
   description = "The cloudflare logpush job data-set"
   type        = string
   validation {
-    condition = contains(["dns_logs","firewall_events","http_requests","nel_reports","spectrum_events","page_shield_events", "audit_logs","gateway_dns","gateway_http","gateway_network","network_analytics_logs","access_requests","casb_findings","device_posture_results","dns_firewall_logs","magic_ids_detections","workers_trace_events","zero_trust_network_sessions", "sinkhole_http_logs"], var.cloudflare_logpush_dataset)
+    condition     = contains(["dns_logs", "firewall_events", "http_requests", "nel_reports", "spectrum_events", "page_shield_events", "audit_logs", "gateway_dns", "gateway_http", "gateway_network", "network_analytics_logs", "access_requests", "casb_findings", "device_posture_results", "dns_firewall_logs", "magic_ids_detections", "workers_trace_events", "zero_trust_network_sessions", "sinkhole_http_logs"], var.cloudflare_logpush_dataset)
     error_message = "Logpush dataset must be one of these values: ['dns_logs','firewall_events','http_requests','nel_reports','spectrum_events','audit_logs','gateway_dns','gateway_http','gateway_network','network_analytics_logs','access_requests','casb_findings','device_posture_results','dns_firewall_logs','magic_ids_detections','workers_trace_events','zero_trust_network_sessions']."
   }
 }
@@ -31,14 +31,14 @@ variable "cloudflare_logpush_fields" {
 
 variable "cloudflare_zone_id" {
   description = "The cloudflare zone id for zone based data-sets"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "cloudflare_account_id" {
   description = "The cloudflare account id for account based data-sets"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "coralogix_application_name" {
