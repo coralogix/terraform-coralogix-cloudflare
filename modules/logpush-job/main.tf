@@ -23,6 +23,7 @@ locals {
     spectrum_events             = "SpectrumEvents"
     page_shield_events          = "PageShieldEvents"
     audit_logs                  = "AuditLogs"
+    audit_logs_v2               = "AuditLogsV2"
     gateway_dns                 = "GatewayDNS"
     gateway_http                = "GatewayHTTP"
     gateway_network             = "GatewayNetwork"
@@ -44,6 +45,7 @@ locals {
     spectrum_events             = "Timestamp"
     page_shield_events          = "Timestamp"
     audit_logs                  = "When"
+    audit_logs_v2               = "ActionTimestamp"
     gateway_dns                 = "Datetime"
     gateway_http                = "Datetime"
     gateway_network             = "Datetime"
@@ -67,6 +69,7 @@ locals {
     spectrum_events             = ["Application", "ClientAsn", "ClientBytes", "ClientCountry", "ClientIP", "ClientMatchedIpFirewall", "ClientPort", "ClientProto", "ClientTcpRtt", "ClientTlsCipher", "ClientTlsClientHelloServerName", "ClientTlsProtocol", "ClientTlsStatus", "ColoCode", "ConnectTimestamp", "DisconnectTimestamp", "Event", "IpFirewall", "OriginBytes", "OriginIP", "OriginPort", "OriginProto", "OriginTcpRtt", "OriginTlsCipher", "OriginTlsFingerprint", "OriginTlsMode", "OriginTlsProtocol", "OriginTlsStatus", "ProxyProtocol", "Status", "Timestamp"]
     page_shield_events          = ["Action", "Host", "PageURL", "PolicyID", "Timestamp", "URL", "URLContainsCDNCGIPath", "URLHost"]
     audit_logs                  = ["ActionResult", "ActionType", "ActorEmail", "ActorID", "ActorIP", "ActorType", "ID", "Interface", "Metadata", "NewValue", "OldValue", "OwnerID", "ResourceID", "ResourceType", "When"]
+    audit_logs_v2               = ["AccountID", "AccountName", "ActionDescription", "ActionResult", "ActionTimestamp", "ActionType", "ActorContext", "ActorEmail", "ActorID", "ActorIPAddress", "ActorTokenDetails", "ActorType", "AuditLogID", "Raw", "ResourceID", "ResourceProduct", "ResourceRequest", "ResourceResponse", "ResourceScope", "ResourceType", "ResourceValue", "ZoneID", "ZoneName"]
     gateway_dns                 = ["ApplicationID", "CNAMECategoryIDs", "CNAMECategoryNames", "ColoCode", "ColoID", "CustomResolveDurationMs", "CustomResolverAddress", "CustomResolverPolicyID", "CustomResolverPolicyName", "CustomResolverResponse", "Datetime", "DeviceID", "DeviceName", "DstIP", "DstPort", "Email", "InitialCategoryIDs", "InitialCategoryNames", "IsResponseCached", "Location", "LocationID", "MatchedCategoryIDs", "MatchedCategoryNames", "MatchedIndicatorFeedIDs", "MatchedIndicatorFeedNames", "Policy", "PolicyID", "Protocol", "QueryCategoryIDs", "QueryCategoryNames", "QueryIndicatorFeedIDs", "QueryIndicatorFeedNames", "QueryName", "QueryNameReversed", "QuerySize", "QueryType", "QueryTypeName", "RCode", "RData", "ResolvedIPCategoryIDs", "ResolvedIPCategoryNames", "ResolvedIPs", "ResolverDecision", "SrcIP", "SrcPort", "TimeZone", "TimeZoneInferredMethod", "UserID"]
     gateway_http                = ["AccountID", "Action", "BlockedFileHash", "BlockedFileName", "BlockedFileReason", "BlockedFileSize", "BlockedFileType", "Datetime", "DestinationIP", "DestinationPort", "DeviceID", "DeviceName", "DownloadMatchedDlpProfileEntries", "DownloadMatchedDlpProfiles", "DownloadedFileNames", "Email", "FileInfo", "HTTPHost", "HTTPMethod", "HTTPStatusCode", "HTTPVersion", "IsIsolated", "PolicyID", "PolicyName", "Referer", "RequestID", "SessionID", "SourceIP", "SourceInternalIP", "SourcePort", "URL", "UntrustedCertificateAction", "UploadMatchedDlpProfileEntries", "UploadMatchedDlpProfiles", "UploadedFileNames", "UserAgent", "UserID"]
     gateway_network             = ["AccountID", "Action", "Datetime", "DestinationIP", "DestinationPort", "DetectedProtocol", "DeviceID", "DeviceName", "Email", "OverrideIP", "OverridePort", "PolicyID", "PolicyName", "SNI", "SessionID", "SourceIP", "SourceInternalIP", "SourcePort", "Transport", "UserID"]
@@ -88,6 +91,7 @@ locals {
     spectrum_events             = "zone"
     page_shield_events          = "zone"
     audit_logs                  = "account"
+    audit_logs_v2               = "account"
     gateway_dns                 = "account"
     gateway_http                = "account"
     gateway_network             = "account"
