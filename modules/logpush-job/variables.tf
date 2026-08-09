@@ -17,9 +17,11 @@ variable "coralogix_private_key" {
 variable "cloudflare_logpush_dataset" {
   description = "The cloudflare logpush job data-set"
   type        = string
+  # NOTE: this list, the error_message list, and the four maps in main.tf must be kept in
+  # sync. Terraform cannot reference a local from a validation block, so it is repeated.
   validation {
-    condition     = contains(["dns_logs", "firewall_events", "http_requests", "nel_reports", "spectrum_events", "page_shield_events", "audit_logs", "audit_logs_v2", "gateway_dns", "gateway_http", "gateway_network", "network_analytics_logs", "access_requests", "casb_findings", "device_posture_results", "dns_firewall_logs", "magic_ids_detections", "workers_trace_events", "zero_trust_network_sessions", "sinkhole_http_logs"], var.cloudflare_logpush_dataset)
-    error_message = "Logpush dataset must be one of these values: ['dns_logs','firewall_events','http_requests','nel_reports','spectrum_events','audit_logs','audit_logs_v2','gateway_dns','gateway_http','gateway_network','network_analytics_logs','access_requests','casb_findings','device_posture_results','dns_firewall_logs','magic_ids_detections','workers_trace_events','zero_trust_network_sessions']."
+    condition     = contains(["dns_logs", "firewall_events", "http_requests", "nel_reports", "spectrum_events", "page_shield_events", "audit_logs", "audit_logs_v2", "gateway_dns", "gateway_http", "gateway_network", "network_analytics_logs", "access_requests", "casb_findings", "device_posture_results", "dns_firewall_logs", "magic_ids_detections", "workers_trace_events", "sinkhole_http_logs", "zero_trust_network_sessions", "websocket_analytics", "zaraz_events", "biso_user_actions", "dex_application_tests", "dex_device_state_events", "dlp_forensic_copies", "email_security_alerts", "email_security_post_delivery_events", "ipsec_logs", "mcp_portal_logs", "mnm_flow_logs", "ssh_logs", "turnstile_events", "warp_config_changes", "warp_toggle_changes"], var.cloudflare_logpush_dataset)
+    error_message = "Logpush dataset must be one of these values: ['dns_logs','firewall_events','http_requests','nel_reports','spectrum_events','page_shield_events','audit_logs','audit_logs_v2','gateway_dns','gateway_http','gateway_network','network_analytics_logs','access_requests','casb_findings','device_posture_results','dns_firewall_logs','magic_ids_detections','workers_trace_events','sinkhole_http_logs','zero_trust_network_sessions','websocket_analytics','zaraz_events','biso_user_actions','dex_application_tests','dex_device_state_events','dlp_forensic_copies','email_security_alerts','email_security_post_delivery_events','ipsec_logs','mcp_portal_logs','mnm_flow_logs','ssh_logs','turnstile_events','warp_config_changes','warp_toggle_changes']."
   }
 }
 
