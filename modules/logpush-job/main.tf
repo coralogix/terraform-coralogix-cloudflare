@@ -80,7 +80,7 @@ locals {
     dex_device_state_events             = "Timestamp"
     dlp_forensic_copies                 = "Datetime"
     email_security_alerts               = "Timestamp"
-    email_security_post_delivery_events = "RequestedAt"
+    email_security_post_delivery_events = "CompletedAt"
     ipsec_logs                          = "Timestamp"
     mcp_portal_logs                     = "Datetime"
     mnm_flow_logs                       = "Timestamp"
