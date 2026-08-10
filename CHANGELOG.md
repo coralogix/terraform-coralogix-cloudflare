@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.4.1
+### 🧰 Bug fixes 🧰
+- Corrected the documented timestamp key for two datasets added in v1.4.0. `websocket_analytics` now uses `EdgeEndTimestamp` and `email_security_post_delivery_events` now uses `CompletedAt`. Both records are emitted after the event they describe begins — a WebSocket at connection close, a post-delivery action on completion — so the previous keys (`EdgeStartTimestamp`, `MessageTimestamp`) could date a record more than 24h in the past and have it dropped at ingestion.
+
 ## v1.4.0
 ### 💡 Enhancements 💡
 - Added the 15 Cloudflare Logpush datasets that were missing, bringing the module to Cloudflare's full catalog of 35: `websocket_analytics`, `zaraz_events` (zone) and `biso_user_actions`, `dex_application_tests`, `dex_device_state_events`, `dlp_forensic_copies`, `email_security_alerts`, `email_security_post_delivery_events`, `ipsec_logs`, `mcp_portal_logs`, `mnm_flow_logs`, `ssh_logs`, `turnstile_events`, `warp_config_changes`, `warp_toggle_changes` (account).
