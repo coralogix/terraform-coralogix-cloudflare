@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.4.0
+### 💡 Enhancements 💡
+- Added the 15 Cloudflare Logpush datasets that were missing, bringing the module to Cloudflare's full catalog of 35: `websocket_analytics`, `zaraz_events` (zone) and `biso_user_actions`, `dex_application_tests`, `dex_device_state_events`, `dlp_forensic_copies`, `email_security_alerts`, `email_security_post_delivery_events`, `ipsec_logs`, `mcp_portal_logs`, `mnm_flow_logs`, `ssh_logs`, `turnstile_events`, `warp_config_changes`, `warp_toggle_changes` (account).
+
+### 🧰 Bug fixes 🧰
+- Fixed the Coralogix `header_dataset` value for `dns_firewall_logs` and `magic_ids_detections`, which were sent as `DnsFirewallLogs` and `MagicIdsDetections`. The ingress endpoint matches this header case-sensitively, so jobs created for either dataset were rejected with HTTP 400. They are now `DNSFirewallLogs` and `MagicIDSDetections`.
+- The `cloudflare_logpush_dataset` validation error message omitted `page_shield_events` and `sinkhole_http_logs`, which the condition accepted. Both lists are now complete and identical.
+
 ## v1.3.0 / 2025-09-22
 ### 💡 Enhancements 💡
 - Update ingress endpoints
