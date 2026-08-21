@@ -5,7 +5,7 @@ variable "coralogix_region" {
   validation {
     condition = contains([
       "EU1", "EU2", "US1", "US2", "US3", "AP1", "AP2", "AP3", "Custom",
-      "Europe", "Europe2", "India", "Singapore", "US", "Indonesia", "Ap2"
+      "Europe", "Europe2", "India", "Singapore", "US", "Indonesia"
     ], var.coralogix_region)
     error_message = "coralogix_region must be one of [EU1, EU2, US1, US2, US3, AP1, AP2, AP3, Custom], or a legacy name [Europe, Europe2, India, Singapore, US, Indonesia]."
   }

@@ -9,7 +9,6 @@ locals {
     AP1       = "ingress.ap1.coralogix.com"
     Singapore = "ingress.ap2.coralogix.com"
     AP2       = "ingress.ap2.coralogix.com"
-    Ap2       = "ingress.ap2.coralogix.com"
     US        = "ingress.us1.coralogix.com"
     US1       = "ingress.us1.coralogix.com"
     US2       = "ingress.us2.coralogix.com"
