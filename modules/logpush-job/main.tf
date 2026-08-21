@@ -9,12 +9,15 @@ locals {
     AP1       = "ingress.ap1.coralogix.com"
     Singapore = "ingress.ap2.coralogix.com"
     AP2       = "ingress.ap2.coralogix.com"
+    Ap2       = "ingress.ap2.coralogix.com"
     US        = "ingress.us1.coralogix.com"
     US1       = "ingress.us1.coralogix.com"
     US2       = "ingress.us2.coralogix.com"
     Indonesia = "ingress.ap3.coralogix.com"
     AP3       = "ingress.ap3.coralogix.com"
+    US3       = "ingress.us3.coralogix.com"
   }
+  coralogix_endpoint = var.coralogix_region == "Custom" ? "ingress.${var.custom_domain}" : local.coralogix_regions[var.coralogix_region]
   coralogix_dataset = {
     dns_logs                            = "DNSLogs"
     firewall_events                     = "FirewallEvents"
@@ -179,7 +182,7 @@ resource "cloudflare_logpush_job" "crx-logpush-zone" {
   enabled          = true
   zone_id          = var.cloudflare_zone_id
   name             = local.job_name
-  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
+  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_endpoint}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_endpoint}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset          = var.cloudflare_logpush_dataset
   # frequency = "low"
   max_upload_bytes            = 5242880
@@ -202,7 +205,7 @@ resource "cloudflare_logpush_job" "crx-logpush-account" {
   enabled          = true
   account_id       = var.cloudflare_account_id
   name             = local.job_name
-  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_regions[var.coralogix_region]}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_regions[var.coralogix_region]}/api/v1/cloudflare/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
+  destination_conf = var.coralogix_subsystem_name != "" || var.coralogix_application_name != "" ? "https://${local.coralogix_endpoint}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_CX-Application-Name=${var.coralogix_application_name}&header_CX-Subsystem-Name=${var.coralogix_subsystem_name}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}" : "https://${local.coralogix_endpoint}/cloudflare/v1/logs?header_Authorization=Bearer%20${var.coralogix_private_key}&header_timestamp-format=UnixNano&header_dataset=${local.coralogix_dataset[var.cloudflare_logpush_dataset]}&tags=dataset:${var.cloudflare_logpush_dataset}"
   dataset          = var.cloudflare_logpush_dataset
   # frequency = "low"
   max_upload_bytes            = 5242880

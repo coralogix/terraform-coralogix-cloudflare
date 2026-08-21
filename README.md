@@ -1,5 +1,7 @@
 # Cloudflare Coralogix Terraform module
 
+> **v1.5.0** — Added support for the `US3` region and a new `Custom` region (paired with the `custom_domain` variable) for private / self-hosted Coralogix ingress endpoints, and fixed the `coralogix_region` validation so `AP2` and `US1` are accepted.
+
 ## Requirements
 
 `Terraform` - Version 1.20+
@@ -27,7 +29,7 @@ provider "cloudflare" {
 module "logpush-job" {
     source = "coralogix/cloudflare/coralogix//modules/logpush-job"
 
-    coralogix_region   = "Europe"
+    coralogix_region   = "EU1"
     coralogix_private_key = "XXXXXX-XXXXX"
     coralogix_application_name = "myapp_cloudflare"
     coralogix_subsystem_name = "mysub_cloudflare"

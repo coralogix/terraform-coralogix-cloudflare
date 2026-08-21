@@ -1,10 +1,13 @@
 variable "coralogix_region" {
-  description = "The Coralogix location region, possible options are [EU1, EU2, AP1, AP2, US1, US2, AP3]"
+  description = "The Coralogix region: [EU1, EU2, US1, US2, US3, AP1, AP2, AP3, Custom]. Legacy names [Europe, Europe2, India, Singapore, US, Indonesia] remain supported."
   type        = string
   default     = "EU1"
   validation {
-    condition     = contains(["Europe", "Europe2", "India", "Singapore", "US", "US2", "AP3", "EU1", "EU2", "AP1", "Ap2", "US2"], var.coralogix_region)
-    error_message = "The coralogix region must be on of these values: [Europe, Europe2, India, Singapore, US, US2, AP3, EU1, EU2, AP1, AP2, US1]."
+    condition = contains([
+      "EU1", "EU2", "US1", "US2", "US3", "AP1", "AP2", "AP3", "Custom",
+      "Europe", "Europe2", "India", "Singapore", "US", "Indonesia", "Ap2"
+    ], var.coralogix_region)
+    error_message = "coralogix_region must be one of [EU1, EU2, US1, US2, US3, AP1, AP2, AP3, Custom], or a legacy name [Europe, Europe2, India, Singapore, US, Indonesia]."
   }
 }
 
@@ -89,5 +92,16 @@ variable "max_upload_interval_seconds" {
   validation {
     condition     = var.max_upload_interval_seconds == null || (coalesce(var.max_upload_interval_seconds, 0) >= 30 && coalesce(var.max_upload_interval_seconds, 0) <= 300)
     error_message = "This setting must be between 30 and 300 seconds (5 minutes)"
+  }
+}
+
+
+variable "custom_domain" {
+  description = "Custom Coralogix domain, bare FQDN without the ingress. prefix (e.g. private.us1.coralogix.com). Required when coralogix_region = \"Custom\"."
+  type        = string
+  default     = null
+  validation {
+    condition     = var.coralogix_region != "Custom" || (var.custom_domain != null && var.custom_domain != "")
+    error_message = "custom_domain is required when coralogix_region is \"Custom\"."
   }
 }
