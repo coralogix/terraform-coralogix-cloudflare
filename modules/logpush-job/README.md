@@ -1,6 +1,8 @@
 # logpush-job
 
 Manage the cloudflare logpush job that sends specific logs to your *Coralogix* account.
+
+> **v1.5.0** — Added the `US3` region and a `Custom` region. Set `coralogix_region = "Custom"` together with `custom_domain` (e.g. `private.us1.coralogix.com`) to send logs to a private / self-hosted Coralogix ingress endpoint. The `coralogix_region` validation now correctly accepts `AP2` and `US1`.
 WARNING: Breaking Change in version 1.10 - New output_options added in cloudflare/cloudflare
 ## Usage
 
@@ -22,7 +24,7 @@ provider "cloudflare" {
 module "logpush-job" {
     source = "coralogix/cloudflare/coralogix//modules/logpush-job"
 
-    coralogix_region   = "Europe"
+    coralogix_region   = "EU1"
     coralogix_private_key = "XXXXXX-XXXXX"
     coralogix_application_name = "myapp_cloudflare"
     coralogix_subsystem_name = "mysub_cloudflare"
@@ -51,7 +53,8 @@ module "logpush-job" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`EU1`, `EU2`, `AP1`, `AP2`, `US1`, `US2`, `AP3`] | `string` | `EU1` | no |
+| <a name="input_coralogix_region"></a> [coralogix\_region](#input\_coralogix\_region) | The Coralogix location region, possible options are [`EU1`, `EU2`, `US1`, `US2`, `US3`, `AP1`, `AP2`, `AP3`, `Custom`]. Legacy names [`Europe`, `Europe2`, `India`, `Singapore`, `US`, `Indonesia`] remain supported. | `string` | `EU1` | no |
+| <a name="input_custom_domain"></a> [custom\_domain](#input\_custom\_domain) | Custom Coralogix domain, bare FQDN without the `ingress.` prefix (e.g. `private.us1.coralogix.com`). Required when `coralogix_region = "Custom"`. | `string` | `null` | no |
 | <a name="input_coralogix_private_key"></a> [coralogix\_private\_key](#input\_coralogix\_private\_key) | The Coralogix private key which is used to validate your authenticity | `string` | n/a | yes |
 | <a name="input_coralogix_application_name"></a> [coralogix\_application\_name](#input\_coralogix\_application\_name) | The Coralogix Application Name for your logs | `string` | `cx-Cloudflare-Logpush-default-application` | no |
 | <a name="input_coralogix_subsystem_name"></a> [coralogix\_subsystem\_name](#input\_coralogix\_subsystem\_name) | The Coralogix SubSystem Name for your logs | `string` | `cx-Cloudflare-Logpush-default-subsystem` | no |
